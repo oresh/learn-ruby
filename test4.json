@@ -1,0 +1,39 @@
+{
+	"items" : [
+		{
+			"name" : "Freddy",
+			"age" : 12,
+			"genre" : "Jazz"
+		},
+		{
+			"name" : "Peter",
+			"age" : 14,
+			"genre" : "Funk"
+		},
+		{
+			"name" : "Genry",
+			"age" : 11,
+			"genre" : "Jazz"
+		},
+		{
+			"name" : "Johny",
+			"age" : 22,
+			"genre" : "Folk"
+		},
+		{
+			"name" : "Clair",
+			"age" : 14,
+			"genre" : "Funk"
+		},
+		{
+			"name" : "Ivan",
+			"age" : 12,
+			"genre" : "Pop"
+		},
+		{
+			"name" : "Terry",
+			"age" : 11,
+			"genre" : "Funk"
+		}
+	]
+}
