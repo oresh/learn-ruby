@@ -29,7 +29,7 @@ class Stringer
 	end
 
 	def includes(what)
-		@string.include? what
+		@string.include?(what)
 	end
 
 	def index_of(what)

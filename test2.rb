@@ -5,46 +5,41 @@ class Prime
   attr_accessor :primes
 
   def initialize
-    self.primes = Array.new
+    @primes = Array.new
   end
 
   def checkPrime(n)
     root = Math.sqrt(n).floor
     (2..root).each do |i|
-      if (n % i) == 0
-        false
-      end
+      return false unless (n % i) != 0
     end
     true
   end
 
   def returnPrimes()
-    self.primes.join(', ')
+    @primes.join(', ')
   end
 
   def getFirstPrimes(max)
     i = 0
     until i >= max
-      i += 1
-      self.primes.push(i)
+      @primes << i += 1
     end
     returnPrimes()
   end
 
   def getLastPrime()
-    self.primes.last
+    @primes.last
   end
 
   def getNthPrime(n)
     n -= 1
-    if (n < 1) 
-      false
-    end
-    if (self.primes.length >= n)
-      self.primes[n]
+    return false unless n >= 1
+    if (@primes.length >= n)
+      @primes[n]
     else
       self.getPrimes(n+1)
-      self.primes[n]
+      @primes[n]
     end
   end
 
@@ -52,16 +47,18 @@ class Prime
     if (max < 4)
       getFirstPrimes(max)
     end
-    if (self.primes.length == 0)
-      self.primes = [1, 2, 3]
+
+    if (@primes.length == 0)
+      @primes = [1, 2, 3]
     end
-    i = self.primes.last
-    until self.primes.length >= max
+
+    i = @primes.last
+    until @primes.length >= max
       i += 1
       next unless (i % 2) != 0
       next unless (i % 3) != 0
       if (checkPrime(i))
-        self.primes.push(i)
+        @primes << i
       end
     end
 
@@ -70,25 +67,22 @@ class Prime
 end
 
 class ExtraPrimes < Prime
-  def randomPrime(arr = self.primes)
+  def randomPrime(arr = @primes)
     prng = Random.new
     random = prng.rand(arr.length)
     arr[random]
   end
 
   def randomPrimes(n = 2)
-    if (n > self.primes.length)
-      false
-    else
-      primes = self.primes
-      random = Array.new
-      (1..n).each do |i|
-        item = self.randomPrime(primes)
-        random.push(item)
-        primes.delete(item)
-      end
-      random.join(', ')
+    return false unless n <= @primes.length
+    primes = self.primes
+    random = Array.new
+    (1..n).each do |i|
+      item = self.randomPrime(primes)
+      random << item
+      primes.delete(item)
     end
+    random.join(', ')
   end
 end
 
@@ -99,6 +93,7 @@ puts "2nd prime is " + myPrime.getNthPrime(2).to_s
 puts "last prime is " + myPrime.getLastPrime().to_s
 puts "primes: #{myPrime.primes}"
 puts "random prime: " + myPrime.randomPrime().to_s
-puts "random prime: " + myPrime.randomPrimes(16).to_s
+puts "random prime: " + myPrime.randomPrimes(4).to_s
+puts myPrime.primes
 
 
