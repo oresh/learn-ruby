@@ -4,60 +4,65 @@ class Stringer
 	attr_accessor :string
 
 	def initialize(s)
-	    self.string = s
+	    @string = s
+	    freeze
+	end
+
+	def change(changer)
+		@string = changer
 	end
 
 	def to_s
-		self.string.to_s
+		@string.to_s
 	end
 
 	def str
-		self.to_s
+		@to_s
 	end
 
 	def replace(what, replacer)
-		self.string.sub(what, replacer)
+		@string.sub(what, replacer)
 	end
 
 	def replace_all(what, replacer)
-		self.string.gsub(what, replacer)
+		@string.gsub(what, replacer)
 	end
 
 	def includes(what)
-		self.string.include? what
+		@string.include? what
 	end
 
 	def index_of(what)
-		self.string.index(what)
+		@string.index(what)
 	end
 
 	def clean
-		str = self.string.lstrip
+		str = @string.lstrip
 		str.rstrip
 	end
 
 	def to_i
-		self.string.to_i
+		@string.to_i
 	end
 
 	def length
-		self.string.length
+		@string.length
 	end
 
 	def lower_case
-		self.string.downcase
+		@string.downcase
 	end
 
 	def upper_case
-		self.string.upcase
+		@string.upcase
 	end
 
 	def first
-		self.string[0]
+		@string[0]
 	end
 
 	def last
-		self.string[self.string.length-1]
+		@string[@string.length-1]
 	end	
 
 	def split_once(splitter)
@@ -71,11 +76,11 @@ class Stringer
 	end
 
 	def split(splitter)
-		self.string.split(splitter)
+		@string.split(splitter)
 	end
 
 	def slice(from, count = 1)
-		self.string.slice(from, count)
+		@string.slice(from, count)
 	end
 
 	def substr(from, count = 1)
@@ -87,7 +92,7 @@ class Stringer
 	end
 
 	def vowels
-		self.string.count("aioue")
+		@string.count("aioue")
 	end
 
 	def consonants
@@ -104,11 +109,15 @@ class Stringer
 	end
 
 	def reverse
-		self.string.reverse
+		@string.reverse
 	end
 
 	def slugify
-		self.string.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+		@string.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+	end
+
+	def << text
+		@string + ' ' + text.to_s
 	end
 end
 
@@ -137,3 +146,5 @@ puts "str.consonants : #{str.consonants}"
 puts "str.reverse : #{str.reverse}"
 puts "str.get_words : #{str.get_words}"
 puts "str.count_words : #{str.count_words}"
+puts str << '123' << '4'
+# puts str.change('hello') # will cause error cause of freeze
